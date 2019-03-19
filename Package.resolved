@@ -2,6 +2,42 @@
   "object": {
     "pins": [
       {
+        "package": "CSQLite",
+        "repositoryURL": "https://github.com/stephencelis/CSQLite.git",
+        "state": {
+          "branch": null,
+          "revision": "9106e983d5e3d5149ee35281ec089484b0def018",
+          "version": "0.0.3"
+        }
+      },
+      {
+        "package": "SQLite.swift",
+        "repositoryURL": "https://github.com/stephencelis/SQLite.swift.git",
+        "state": {
+          "branch": null,
+          "revision": "210098546d59678f720e4ef67f8b562acfebbdb0",
+          "version": "0.11.5"
+        }
+      },
+      {
+        "package": "SwiftSoup",
+        "repositoryURL": "https://github.com/scinfu/SwiftSoup.git",
+        "state": {
+          "branch": null,
+          "revision": "11da8c685ddde2d519fad04a7daf8485bbbc773e",
+          "version": "1.7.5"
+        }
+      },
+      {
+        "package": "SwiftyBeaver",
+        "repositoryURL": "https://github.com/SwiftyBeaver/SwiftyBeaver.git",
+        "state": {
+          "branch": null,
+          "revision": "78352a16ed33e53307795b46145a1c739e08fb83",
+          "version": "1.6.2"
+        }
+      },
+      {
         "package": "ZEGBot",
         "repositoryURL": "https://github.com/shaneqi/ZEGBot.git",
         "state": {
