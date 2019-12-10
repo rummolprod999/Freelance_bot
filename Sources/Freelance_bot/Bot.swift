@@ -9,7 +9,7 @@ protocol Bot {
     init(url: String)
     func getAllPost(html: String) -> Array<Element>?
     func filterPosts(elems: Array<Element>) -> Array<Element>
-    func CreatePost(p: Element)
+    func CreatePost(p: Element, sqlite: SqliteUtils?)
 }
 
 extension Bot{
@@ -24,8 +24,9 @@ extension Bot{
             return
         }
         let fPost = filterPosts(elems: posts)
+        let sqlite = SqliteUtils()
         for p in fPost {
-            CreatePost(p: p)
+            CreatePost(p: p, sqlite: sqlite)
         }
     }
 }

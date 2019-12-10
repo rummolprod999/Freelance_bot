@@ -12,10 +12,9 @@ class BotFreelanceRu: Bot {
         self.url = url
     }
 
-    internal func CreatePost(p: Element) {
+    internal func CreatePost(p: Element, sqlite: SqliteUtils?) {
         let message = MessageFreelance(element: p)
         let (id, msg) = message.createMessage()
-        let sqlite = SqliteUtils()
         if let notExist = sqlite?.checkPost(id_post: id), notExist {
             let bot = TelegramBot()
             bot.sendMessage(msg)
