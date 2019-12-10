@@ -1,16 +1,18 @@
 //
-// Created by alex on 14.03.19.
+// Created by alex on 10.12.2019.
 //
-
-import Foundation
 import SwiftSoup
+import Foundation
 
-class Bot {
-    let url: String?
+protocol Bot {
+    var url: String? {get}
+    init(url: String)
+    func getAllPost(html: String) -> Array<Element>?
+    func filterPosts(elems: Array<Element>) -> Array<Element>
+    func CreatePost(p: Element)
+}
 
-    init(url: String) {
-        self.url = url
-    }
+extension Bot{
 
     func run() {
         guard let p = DownloadPage.download(page: url!) else {
@@ -25,49 +27,5 @@ class Bot {
         for p in fPost {
             CreatePost(p: p)
         }
-    }
-
-    private func CreatePost(p: Element) {
-        let message = Message(element: p)
-        let (id, msg) = message.createMessage()
-        let sqlite = SqliteUtils()
-        if let notExist = sqlite?.checkPost(id_post: id), notExist {
-            let bot = TelegramBot()
-            bot.sendMessage(msg)
-        }
-
-    }
-
-    func getAllPost(html: String) -> Array<Element>? {
-        do {
-            let doc: Document = try SwiftSoup.parse(html)
-            let elements = try doc.select("div.proj")
-            return elements.array()
-        } catch Exception.Error(_, let message) {
-            log.error("Failed get elements from page: \(message)")
-            return nil
-        } catch {
-            log.error("Failed get elements from page")
-            return nil
-        }
-    }
-
-    func filterPosts(elems: Array<Element>) -> Array<Element> {
-        var newArr: Array<Element> = []
-        for e in elems {
-            do {
-                let text = try e.text()
-                if text.contains("Для Бизнес-аккаунтов") || text.contains("Безопасная Сделка") {
-                    continue
-                }
-                newArr.append(e)
-            } catch Exception.Error(_, let message) {
-                log.error("Failed extract text from post: \(message)")
-            } catch {
-                log.error("Failed extract text from post")
-            }
-        }
-        return newArr
-
     }
 }

@@ -5,7 +5,7 @@
 import Foundation
 import SwiftSoup
 
-struct Post {
+struct PostFreelance {
     let id: String
     let name: String
     let description: String
