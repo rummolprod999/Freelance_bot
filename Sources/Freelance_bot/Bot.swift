@@ -29,4 +29,23 @@ extension Bot{
             CreatePost(p: p, sqlite: sqlite)
         }
     }
+
+    func filterPosts(elems: Array<Element>) -> Array<Element> {
+        var newArr: Array<Element> = []
+        for e in elems {
+            do {
+                let text = try e.text()
+                if text.contains("Для Бизнес-аккаунтов") {
+                    continue
+                }
+                newArr.append(e)
+            } catch Exception.Error(_, let message) {
+                log.error("Failed extract text from post: \(message)")
+            } catch {
+                log.error("Failed extract text from post")
+            }
+        }
+        return newArr
+
+    }
 }
