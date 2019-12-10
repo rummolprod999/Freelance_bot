@@ -10,7 +10,7 @@ log.addDestination(file)
 func main() {
     FilesOperations.deleteLogFile(logFile)
     log.info("start parser")
-    let b = Bot(url: "https://freelance.ru/projects/?spec=4")
+    let b = BotFreelanceRu(url: "https://freelance.ru/projects/?spec=4")
     b.run()
     log.info("end parser")
 }

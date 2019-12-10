@@ -5,6 +5,9 @@
 import Foundation
 import SQLite
 
+extension String: Error {
+}
+
 extension AnySequence {
     var count: Int {
         return reduce(0) { acc, row in
@@ -19,12 +22,35 @@ class SqliteUtils {
 
     init?() {
         do {
-            connect = try Connection("freelance.sqlite3")
+            let fm = FileManager.default
+            if !fm.fileExists(atPath: dbName) {
+                if !fm.createFile(atPath: dbName, contents: nil) {
+                    throw  "cannot create file database"
+                }
+            }
+        } catch let error {
+            log.error("Failed to database connect \(error)")
+            return nil
+        }
+        do {
+            connect = try Connection(dbName)
+            try connect?.execute("""
+                                 BEGIN TRANSACTION;
+                                       CREATE TABLE IF NOT EXISTS "Post"
+                                             (
+                                             id INTEGER not null
+                                             constraint Post_pk
+                                             primary key autoincrement,
+                                             post_id TEXT not null
+                                             );
+                                 COMMIT TRANSACTION;
+                                 """
+            )
         } catch Result.error(let message, _, _) {
             log.error("Failed to database connect: \(message)")
             return nil
-        } catch {
-            log.error("Failed to database connect")
+        } catch let error {
+            log.error("Failed to database connect \(error)")
             return nil
         }
     }

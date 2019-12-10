@@ -16,8 +16,8 @@ class FilesOperations {
             if fileSize > 1_000_000 {
                 try fm.removeItem(atPath: logFile)
             }
-        } catch {
-            log.error("Failed get log file size or delete this file")
+        } catch let error{
+            log.error("Failed get log file size or delete this file \(error)")
         }
     }
 }
