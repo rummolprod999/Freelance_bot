@@ -13,6 +13,8 @@ func main() {
     log.info("start parser")
     let b = BotFreelanceRu(url: "https://freelance.ru/projects/?spec=4")
     b.run()
+    let f = BotFlRu(url: "https://www.fl.ru/projects/")
+    f.run()
     log.info("end parser")
 }
 
