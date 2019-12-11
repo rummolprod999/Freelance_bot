@@ -14,7 +14,8 @@ class BotFlRu: Bot {
 
     func getAllPost(html: String) -> Array<Element>? {
         do {
-            let doc: Document = try SwiftSoup.parse(html)
+            let cleanHtml = html.replacingOccurrences(of: "<script type=\"text/javascript\">document.write('", with: "").replacingOccurrences(of: "');</script>", with: "")
+            let doc: Document = try SwiftSoup.parse(cleanHtml)
             let elements = try doc.select("div.b-post")
             return elements.array()
         } catch Exception.Error(_, let message) {

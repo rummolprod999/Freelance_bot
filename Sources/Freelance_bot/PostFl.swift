@@ -37,7 +37,8 @@ public struct PostFl {
             url = ""
         }
         do {
-            date = try element.select("div.b-post__foot div.b-post__txt").first()?.text() ?? ""
+            let dateT = try element.select("div.b-post__foot div.b-post__txt").first()
+            date = dateT?.textNodes().last?.text().trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         } catch {
             date = ""
         }
