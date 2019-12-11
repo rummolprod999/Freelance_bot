@@ -30,7 +30,7 @@ class BotFlRu: Bot {
         let message = MessageFl(element: p)
         let (id, msg) = message.createMessage()
         if let notExist = sqlite?.checkPost(id_post: id), notExist {
-            let bot = TelegramBot()
+            let bot = TelegramBot(sender: SenderFl())
             bot.sendMessage(msg)
         }
     }
