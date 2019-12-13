@@ -2,5 +2,10 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/CSQLite.git-2850447625508811297" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/SQLite.swift.git--2578950026757142867" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/SwiftSoup.git-7911468824048903780" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/SwiftyBeaver.git-1939400046076090716" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.build/checkouts/ZEGBot.git--3846993638098155195" vcs="Git" />
   </component>
 </project>

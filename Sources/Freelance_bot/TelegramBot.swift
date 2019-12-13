@@ -6,13 +6,12 @@ import ZEGBot
 import Foundation
 
 class TelegramBot {
-    let botToken = "Youre channel"
     let bot: ZEGBot?
-    let sender: Sender?
+    let sender: Sendable?
 
-    init() {
+    init(sender: Sendable, botToken: String) {
         bot = ZEGBot(token: botToken)
-        sender = Sender()
+        self.sender = sender
     }
 
     func sendMessage(_ message: String) {

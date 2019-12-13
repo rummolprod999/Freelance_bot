@@ -7,9 +7,11 @@ import SwiftSoup
 
 class BotFlRu: Bot {
     var url: String?
+    var configuration: Configuration
 
-    required init(url: String) {
+    required init(url: String, configuration: Configuration) {
         self.url = url
+        self.configuration = configuration
     }
 
     func getAllPost(html: String) -> Array<Element>? {
@@ -31,9 +33,28 @@ class BotFlRu: Bot {
         let message = MessageFl(element: p)
         let (id, msg) = message.createMessage()
         if let notExist = sqlite?.checkPost(id_post: id), notExist {
-            let bot = TelegramBot(sender: SenderFl())
+            let bot = TelegramBot(sender: Sender(chatId: configuration.chatIdFl), botToken: configuration.botToken)
             bot.sendMessage(msg)
         }
+    }
+
+    func filterPosts(elems: Array<Element>) -> Array<Element> {
+        var newArr: Array<Element> = []
+        for e in elems {
+            do {
+                let text = try e.html()
+                if !text.contains("Для всех") {
+                    continue
+                }
+                newArr.append(e)
+            } catch Exception.Error(_, let message) {
+                log.error("Failed extract text from post: \(message)")
+            } catch {
+                log.error("Failed extract text from post")
+            }
+        }
+        return newArr
+
     }
 
 }

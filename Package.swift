@@ -18,6 +18,7 @@ let package = Package(
         .package(url: "https://github.com/shaneqi/ZEGBot.git", .upToNextMajor(from: "4.2.0")),
         .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "1.7.4"),
         .package(url: "https://github.com/stephencelis/SQLite.swift.git", from: "0.11.5"),
+        .package(url: "https://github.com/IBM-Swift/Configuration.git", from: "3.0.2"),
 
     ],
     targets: [
@@ -25,7 +26,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "Freelance_bot",
-            dependencies: ["ZEGBot", "SwiftSoup", "SQLite", "SwiftyBeaver"]),
+            dependencies: ["ZEGBot", "SwiftSoup", "SQLite", "SwiftyBeaver", "Configuration"]),
         .testTarget(
             name: "Freelance_botTests",
             dependencies: ["Freelance_bot"]),

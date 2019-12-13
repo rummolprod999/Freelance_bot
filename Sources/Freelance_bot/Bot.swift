@@ -3,10 +3,11 @@
 //
 import SwiftSoup
 import Foundation
+import Configuration
 
 protocol Bot {
     var url: String? {get}
-    init(url: String)
+    init(url: String, configuration: Configuration)
     func getAllPost(html: String) -> Array<Element>?
     func filterPosts(elems: Array<Element>) -> Array<Element>
     func CreatePost(p: Element, sqlite: SqliteUtils?)
@@ -31,21 +32,6 @@ extension Bot{
     }
 
     func filterPosts(elems: Array<Element>) -> Array<Element> {
-        var newArr: Array<Element> = []
-        for e in elems {
-            do {
-                let text = try e.text()
-                if text.contains("Для Бизнес-аккаунтов") {
-                    continue
-                }
-                newArr.append(e)
-            } catch Exception.Error(_, let message) {
-                log.error("Failed extract text from post: \(message)")
-            } catch {
-                log.error("Failed extract text from post")
-            }
-        }
-        return newArr
-
+        return elems
     }
 }
