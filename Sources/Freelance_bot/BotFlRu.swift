@@ -18,7 +18,7 @@ class BotFlRu: Bot {
         do {
             let cleanHtml = html.replacingOccurrences(of: "<script type=\"text/javascript\">document.write('", with: "").replacingOccurrences(of: "');</script>", with: "")
             let doc: Document = try SwiftSoup.parse(cleanHtml)
-            let elements = try doc.select("div.b-post")
+            let elements = try doc.select("div[id^=project-item]")
             return elements.array()
         } catch Exception.Error(_, let message) {
             log.error("Failed get elements from page: \(message)")
@@ -37,24 +37,4 @@ class BotFlRu: Bot {
             bot.sendMessage(msg)
         }
     }
-
-    func filterPosts(elems: Array<Element>) -> Array<Element> {
-        var newArr: Array<Element> = []
-        for e in elems {
-            do {
-                let text = try e.html()
-                if !text.contains("Для всех") {
-                    continue
-                }
-                newArr.append(e)
-            } catch Exception.Error(_, let message) {
-                log.error("Failed extract text from post: \(message)")
-            } catch {
-                log.error("Failed extract text from post")
-            }
-        }
-        return newArr
-
-    }
-
 }
