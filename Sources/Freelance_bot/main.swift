@@ -14,7 +14,7 @@ let configurationManager = ConfigurationManager()
 func main() {
     FilesOperations.deleteLogFile(logFile)
     log.info("start parser")
-    let b = BotFreelanceRu(url: "https://freelance.ru/projects/?spec=4", configuration: configurationManager)
+    let b = BotFreelanceRu(url: "https://freelance.ru/projects/filter/?specs=4:116&page=1", configuration: configurationManager)
     b.run()
     let f = BotFlRu(url: "https://www.fl.ru/projects/", configuration: configurationManager)
     f.run()
